@@ -82,16 +82,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD':'DcfgCAFeBE32b3C6Dce34fbDdG6G5Gf-',
-        'HOST': 'roundhouse.proxy.rlwy.net',
-        'PORT': '24332',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD':'DcfgCAFeBE32b3C6Dce34fbDdG6G5Gf-',
+#         'HOST': 'roundhouse.proxy.rlwy.net',
+#         'PORT': '24332',
+#     }
+# }
 
 
 # Password validation
@@ -156,3 +156,13 @@ FILE_UPLOAD_PERMISSIONS=0o640
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Render PostgresSQL database (Live)
+
+import dj_database_url 
+
+# DATABASES["default"] = dj_database_url.parse("postgres://productiondatabase_rj5c_user:rqDo2EiMjmK5ZDxA7mVEl14K3JiT9FJC@dpg-cm614kmd3nmc73ccbe50-a.frankfurt-postgres.render.com/productiondatabase_rj5c")
+
+DATABASES = {
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
